@@ -249,44 +249,44 @@
   </style>
 </head>
 <body>
-  <h1><i class="fas fa-calendar-check"></i> Book a Counseling Session</h1>
-  <p class="subtitle">Connect with our expert counselors for personalized guidance</p>
+  <h1><i class="fas fa-calendar-check"></i> Book a Session with a Counselor</h1>
+  <p class="subtitle">Get personalized guidance from someone who understands</p>
 
   <div class="success-message" id="successMessage">
     <i class="fas fa-check-circle"></i>
     <p>Your session has been booked successfully! We'll contact you soon.</p>
   </div>
 
-  <h2 style="text-align: center; color: var(--secondary); margin: 2rem 0 1rem; font-size: 1.5rem;">Our Expert Counselors</h2>
+  <h2 style="text-align: center; color: var(--secondary); margin: 2rem 0 1rem; font-size: 1.5rem;">Meet Our Counselors</h2>
   
   <div class="counselors-grid">
     <div class="counselor-card">
       <div class="counselor-avatar">
         <i class="fas fa-user-tie"></i>
       </div>
-      <div class="counselor-name">Dr. Sarah Johnson</div>
-      <div class="counselor-specialty">Software Engineering</div>
+      <div class="counselor-name">Priya Sharma</div>
+      <div class="counselor-specialty">Software & IT Careers</div>
     </div>
     <div class="counselor-card">
       <div class="counselor-avatar">
         <i class="fas fa-user-graduate"></i>
       </div>
-      <div class="counselor-name">Prof. Michael Chen</div>
-      <div class="counselor-specialty">Data Science</div>
+      <div class="counselor-name">Rajesh Kumar</div>
+      <div class="counselor-specialty">Data & Analytics</div>
     </div>
     <div class="counselor-card">
       <div class="counselor-avatar">
         <i class="fas fa-user-md"></i>
       </div>
-      <div class="counselor-name">Emma Williams</div>
-      <div class="counselor-specialty">UI/UX Design</div>
+      <div class="counselor-name">Ananya Patel</div>
+      <div class="counselor-specialty">Design & Creative</div>
     </div>
     <div class="counselor-card">
       <div class="counselor-avatar">
         <i class="fas fa-user-check"></i>
       </div>
-      <div class="counselor-name">James Rodriguez</div>
-      <div class="counselor-specialty">Digital Marketing</div>
+      <div class="counselor-name">Vikram Reddy</div>
+      <div class="counselor-specialty">Business & Marketing</div>
     </div>
   </div>
 
@@ -310,7 +310,7 @@
         <label for="phone">
           <i class="fas fa-phone"></i> Phone Number:
         </label>
-        <input type="tel" id="phone" placeholder="+1 (555) 000-0000" required>
+        <input type="tel" id="phone" placeholder="+91 98765 43210" pattern="[+][0-9]{2}[\s][0-9]{5}[\s][0-9]{5}" required>
       </div>
 
       <div class="form-group">
@@ -320,12 +320,13 @@
         <select id="topic" required>
           <option value="">Select a field...</option>
           <option>Software Development</option>
-          <option>Data Science</option>
-          <option>UI/UX Design</option>
+          <option>Data Science & Analytics</option>
+          <option>Design (UI/UX/Graphic)</option>
           <option>Digital Marketing</option>
-          <option>Product Management</option>
-          <option>Cybersecurity</option>
-          <option>Other</option>
+          <option>Management & Business</option>
+          <option>Engineering (Non-IT)</option>
+          <option>Healthcare & Medicine</option>
+          <option>Not Sure Yet</option>
         </select>
       </div>
 
@@ -340,7 +341,7 @@
         <label for="message">
           <i class="fas fa-comment"></i> Questions or Goals:
         </label>
-        <textarea id="message" rows="4" placeholder="Tell us about your career goals, questions, or what you'd like to discuss during the session..." required></textarea>
+        <textarea id="message" rows="4" placeholder="What would you like to discuss? Any specific questions or concerns about your career?" required></textarea>
       </div>
 
       <button type="submit">

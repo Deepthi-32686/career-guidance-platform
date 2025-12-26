@@ -264,8 +264,8 @@
   </style>
 </head>
 <body>
-  <h1><i class="fas fa-tasks"></i> Skill Assessment Test</h1>
-  <p class="subtitle">Discover your strengths and ideal career path</p>
+  <h1><i class="fas fa-tasks"></i> Quick Career Assessment</h1>
+  <p class="subtitle">Answer honestly - there are no right or wrong answers</p>
 
   <div class="progress-bar">
     <div class="progress-bar-inner" id="progressBar"></div>
@@ -276,7 +276,7 @@
     <form id="assessmentForm">
       <div class="question">
         <span class="question-number">Question 1</span>
-        <label>Do you enjoy solving logical problems and puzzles?</label>
+        <label>Do you enjoy solving puzzles or fixing things when they break?</label>
         <div class="radio-group">
           <div class="radio-option">
             <input type="radio" name="q1" value="yes" id="q1-yes" onchange="updateProgress()">
@@ -291,7 +291,7 @@
 
       <div class="question">
         <span class="question-number">Question 2</span>
-        <label>Do you like designing and creative work?</label>
+        <label>Are you the creative type who likes designing or making art?</label>
         <div class="radio-group">
           <div class="radio-option">
             <input type="radio" name="q2" value="yes" id="q2-yes" onchange="updateProgress()">
@@ -306,7 +306,7 @@
 
       <div class="question">
         <span class="question-number">Question 3</span>
-        <label>Are you interested in working with data and analytics?</label>
+        <label>Do you find working with numbers and spreadsheets interesting?</label>
         <div class="radio-group">
           <div class="radio-option">
             <input type="radio" name="q3" value="yes" id="q3-yes" onchange="updateProgress()">
@@ -321,7 +321,7 @@
 
       <div class="question">
         <span class="question-number">Question 4</span>
-        <label>Do you enjoy communicating and working with people?</label>
+        <label>Do you prefer working with people rather than working alone?</label>
         <div class="radio-group">
           <div class="radio-option">
             <input type="radio" name="q4" value="yes" id="q4-yes" onchange="updateProgress()">
@@ -386,17 +386,17 @@
       let description = "";
 
       if (q1 === 'yes' && q3 === 'yes') {
-        career = "Data Scientist or Software Engineer";
-        description = "You have a strong aptitude for logical thinking and data analysis. Consider careers in software development, data science, or analytics where you can solve complex problems using technology.";
+        career = "Software Developer or Data Analyst";
+        description = "You're good with logic and numbers. Consider learning programming or data analysis. These skills are in high demand and you can start learning online right now.";
       } else if (q2 === 'yes') {
-        career = "UI/UX Designer or Creative Professional";
-        description = "Your creative mindset makes you well-suited for design roles. Explore careers in UI/UX design, graphic design, or digital art where you can bring your creative vision to life.";
+        career = "Designer or Creative Professional";
+        description = "Your creative side is strong. Look into UI/UX design, graphic design, or content creation. Start building a portfolio of your work to showcase your skills.";
       } else if (q4 === 'yes') {
-        career = "Product Manager or Digital Marketer";
-        description = "Your strong communication skills make you ideal for roles that involve collaboration and client interaction. Consider careers in product management, marketing, or business development.";
+        career = "Marketing or Product Management";
+        description = "You're a people person. Careers in marketing, sales, or product management could suit you well. These roles need good communication and understanding what others want.";
       } else {
-        career = "Versatile Professional";
-        description = "You have a diverse set of interests! Explore multiple career paths including cybersecurity, project management, or consulting to find what resonates most with you.";
+        career = "Keep Exploring";
+        description = "You have varied interests, which is great! Try exploring different fields through internships or online courses. Sometimes the best career finds you when you're trying new things.";
       }
 
       document.getElementById('resultTitle').textContent = career;
