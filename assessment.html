@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skill Assessment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2a9d8f;
+      --secondary: #264653;
+      --accent: #e9c46a;
+      --light: #f4f4f4;
+      --dark: #1d3557;
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--light) 0%, #e8f5f3 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 { 
+      text-align: center; 
+      color: var(--secondary);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--secondary);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .progress-bar {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      background: white;
+      padding: 1rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-bar-inner {
+      height: 8px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .test { 
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      width: 90%; 
+      max-width: 700px;
+      margin: 20px auto;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      border-top: 4px solid var(--primary);
+    }
+
+    .question {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--light);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .question:hover {
+      background: #e8f5f3;
+      transform: translateX(5px);
+    }
+
+    .question-number {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    label { 
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .radio-option input[type="radio"] {
+      display: none;
+    }
+
+    .radio-option label {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      background: white;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .radio-option label:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    button { 
+      background: linear-gradient(135deg, var(--primary) 0%, #1d7a6e 100%);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: var(--radius);
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+      width: 100%;
+    }
+
+    button:hover { 
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(38, 70, 83, 0.4);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--secondary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      margin: 2rem auto;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(38, 70, 83, 0.3);
+    }
+
+    .back-link:hover {
+      background: var(--dark);
+      transform: translateX(-5px);
+    }
+
+    .back-container {
+      text-align: center;
+    }
+
+    .result-container {
+      display: none;
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      max-width: 700px;
+      margin: 2rem auto;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      border-top: 4px solid var(--accent);
+      text-align: center;
+    }
+
+    .result-container.show {
+      display: block;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .result-icon {
+      font-size: 4rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .result-title {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .result-description {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .test {
+        padding: 1.5rem;
+      }
+      .radio-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1><i class="fas fa-tasks"></i> Skill Assessment Test</h1>
+  <p class="subtitle">Discover your strengths and ideal career path</p>
+
+  <div class="progress-bar">
+    <div class="progress-bar-inner" id="progressBar"></div>
+    <div class="progress-text" id="progressText">Question 0 of 4</div>
+  </div>
+
+  <div class="test">
+    <form id="assessmentForm">
+      <div class="question">
+        <span class="question-number">Question 1</span>
+        <label>Do you enjoy solving logical problems and puzzles?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="q1" value="yes" id="q1-yes" onchange="updateProgress()">
+            <label for="q1-yes"><i class="fas fa-check"></i> Yes</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="q1" value="no" id="q1-no" onchange="updateProgress()">
+            <label for="q1-no"><i class="fas fa-times"></i> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">Question 2</span>
+        <label>Do you like designing and creative work?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="q2" value="yes" id="q2-yes" onchange="updateProgress()">
+            <label for="q2-yes"><i class="fas fa-check"></i> Yes</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="q2" value="no" id="q2-no" onchange="updateProgress()">
+            <label for="q2-no"><i class="fas fa-times"></i> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">Question 3</span>
+        <label>Are you interested in working with data and analytics?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="q3" value="yes" id="q3-yes" onchange="updateProgress()">
+            <label for="q3-yes"><i class="fas fa-check"></i> Yes</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="q3" value="no" id="q3-no" onchange="updateProgress()">
+            <label for="q3-no"><i class="fas fa-times"></i> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">Question 4</span>
+        <label>Do you enjoy communicating and working with people?</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="q4" value="yes" id="q4-yes" onchange="updateProgress()">
+            <label for="q4-yes"><i class="fas fa-check"></i> Yes</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="q4" value="no" id="q4-no" onchange="updateProgress()">
+            <label for="q4-no"><i class="fas fa-times"></i> No</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" disabled>
+        <i class="fas fa-paper-plane"></i> Submit Assessment
+      </button>
+    </form>
+  </div>
+
+  <div class="result-container" id="resultContainer">
+    <div class="result-icon">
+      <i class="fas fa-trophy"></i>
+    </div>
+    <h2 class="result-title" id="resultTitle">Your Results</h2>
+    <p class="result-description" id="resultDescription"></p>
+    <a href="career.html" class="btn" style="background: var(--primary); color: white; padding: 0.8rem 2rem; border-radius: var(--radius); text-decoration: none; display: inline-block; margin-top: 1rem;">
+      <i class="fas fa-briefcase"></i> Explore Recommended Careers
+    </a>
+  </div>
+
+  <div class="back-container">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+  </div>
+
+  <script>
+    function updateProgress() {
+      const form = document.getElementById('assessmentForm');
+      const questions = ['q1', 'q2', 'q3', 'q4'];
+      let answered = 0;
+
+      questions.forEach(q => {
+        if (form.elements[q].value) answered++;
+      });
+
+      const percentage = (answered / questions.length) * 100;
+      document.getElementById('progressBar').style.width = percentage + '%';
+      document.getElementById('progressText').textContent = `Question ${answered} of ${questions.length}`;
+      
+      document.getElementById('submitBtn').disabled = answered !== questions.length;
+    }
+
+    document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const q1 = document.querySelector('input[name="q1"]:checked').value;
+      const q2 = document.querySelector('input[name="q2"]:checked').value;
+      const q3 = document.querySelector('input[name="q3"]:checked').value;
+      const q4 = document.querySelector('input[name="q4"]:checked').value;
+
+      let career = "";
+      let description = "";
+
+      if (q1 === 'yes' && q3 === 'yes') {
+        career = "Data Scientist or Software Engineer";
+        description = "You have a strong aptitude for logical thinking and data analysis. Consider careers in software development, data science, or analytics where you can solve complex problems using technology.";
+      } else if (q2 === 'yes') {
+        career = "UI/UX Designer or Creative Professional";
+        description = "Your creative mindset makes you well-suited for design roles. Explore careers in UI/UX design, graphic design, or digital art where you can bring your creative vision to life.";
+      } else if (q4 === 'yes') {
+        career = "Product Manager or Digital Marketer";
+        description = "Your strong communication skills make you ideal for roles that involve collaboration and client interaction. Consider careers in product management, marketing, or business development.";
+      } else {
+        career = "Versatile Professional";
+        description = "You have a diverse set of interests! Explore multiple career paths including cybersecurity, project management, or consulting to find what resonates most with you.";
+      }
+
+      document.getElementById('resultTitle').textContent = career;
+      document.getElementById('resultDescription').textContent = description;
+      document.querySelector('.test').style.display = 'none';
+      document.querySelector('.progress-bar').style.display = 'none';
+      document.getElementById('resultContainer').classList.add('show');
+    });
+  </script>
+</body>
+</html>

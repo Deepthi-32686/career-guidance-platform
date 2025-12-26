@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Paths</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2a9d8f;
+      --secondary: #264653;
+      --accent: #e9c46a;
+      --light: #f4f4f4;
+      --dark: #1d3557;
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: 'Poppins', sans-serif;
+      padding: 20px; 
+      background: linear-gradient(135deg, var(--light) 0%, #e8f5f3 100%);
+      min-height: 100vh;
+    }
+
+    h1 { 
+      color: var(--secondary);
+      text-align: center; 
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+    }
+
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .career { 
+      background: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-left: 5px solid var(--primary);
+    }
+
+    .career::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, transparent 50%, rgba(42, 157, 143, 0.05) 50%);
+      border-radius: 0 var(--radius) 0 100%;
+    }
+
+    .career:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(42, 157, 143, 0.2);
+      border-left-color: var(--accent);
+    }
+
+    .career-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .career:hover .career-icon {
+      transform: scale(1.1) rotate(5deg);
+      color: var(--accent);
+    }
+
+    h3 { 
+      color: var(--secondary);
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .career p {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .back-link { 
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      margin: 3rem auto;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
+    }
+
+    .back-link:hover {
+      background: var(--secondary);
+      transform: translateX(-5px);
+    }
+
+    .back-container {
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .career-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1><i class="fas fa-briefcase"></i> Explore Career Paths</h1>
+  <p class="subtitle">Find your dream career from our comprehensive database</p>
+
+  <div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" id="searchInput" placeholder="Search for careers..." onkeyup="filterCareers()">
+  </div>
+
+  <div class="career-grid" id="careerGrid">
+    <div class="career" data-keywords="software programming coding development">
+      <div class="career-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <h3>Software Engineer</h3>
+      <p>Design and develop computer applications and systems using modern programming languages and frameworks.</p>
+      <div class="skills">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Problem Solving</span>
+      </div>
+    </div>
+
+    <div class="career" data-keywords="data scientist analysis machine learning ai">
+      <div class="career-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h3>Data Scientist</h3>
+      <p>Analyze complex data to find trends and help companies make intelligent, data-driven decisions.</p>
+      <div class="skills">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Statistics</span>
+        <span class="skill-tag">ML/AI</span>
+      </div>
+    </div>
+
+    <div class="career" data-keywords="design ui ux interface user experience">
+      <div class="career-icon">
+        <i class="fas fa-pencil-ruler"></i>
+      </div>
+      <h3>UI/UX Designer</h3>
+      <p>Create beautiful and easy-to-use interfaces that deliver exceptional user experiences.</p>
+      <div class="skills">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Adobe XD</span>
+        <span class="skill-tag">User Research</span>
+      </div>
+    </div>
+
+    <div class="career" data-keywords="marketing digital seo content social media">
+      <div class="career-icon">
+        <i class="fas fa-bullhorn"></i>
+      </div>
+      <h3>Digital Marketer</h3>
+      <p>Promote products and services through digital channels including social media, email, and search engines.</p>
+      <div class="skills">
+        <span class="skill-tag">SEO</span>
+        <span class="skill-tag">Content</span>
+        <span class="skill-tag">Analytics</span>
+      </div>
+    </div>
+
+    <div class="career" data-keywords="product manager agile scrum leadership">
+      <div class="career-icon">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+      <h3>Product Manager</h3>
+      <p>Lead product development from conception to launch, working with cross-functional teams.</p>
+      <div class="skills">
+        <span class="skill-tag">Strategy</span>
+        <span class="skill-tag">Agile</span>
+        <span class="skill-tag">Leadership</span>
+      </div>
+    </div>
+
+    <div class="career" data-keywords="cybersecurity security hacking ethical penetration">
+      <div class="career-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h3>Cybersecurity Analyst</h3>
+      <p>Protect organizations from cyber threats by monitoring, detecting, and responding to security incidents.</p>
+      <div class="skills">
+        <span class="skill-tag">Security</span>
+        <span class="skill-tag">Networking</span>
+        <span class="skill-tag">Risk Analysis</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-container">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+  </div>
+
+  <script>
+    function filterCareers() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const careers = document.querySelectorAll('.career');
+      
+      careers.forEach(career => {
+        const keywords = career.getAttribute('data-keywords');
+        const title = career.querySelector('h3').textContent.toLowerCase();
+        const description = career.querySelector('p').textContent.toLowerCase();
+        
+        if (keywords.includes(input) || title.includes(input) || description.includes(input)) {
+          career.style.display = 'block';
+          career.style.animation = 'fadeIn 0.5s ease-out';
+        } else {
+          career.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

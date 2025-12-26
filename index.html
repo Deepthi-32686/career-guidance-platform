@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Guidance & Counseling Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* 🌐 Root Variables */
+    :root {
+      --primary: #2a9d8f;
+      --secondary: #264653;
+      --accent: #e9c46a;
+      --light: #f4f4f4;
+      --dark: #1d3557;
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 🧱 Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--secondary);
+      line-height: 1.6;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1d7a6e 100%);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+
+    nav {
+      background: var(--secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(233, 196, 106, 0.1);
+    }
+
+    nav a:hover::before {
+      width: 80%;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--secondary);
+      text-align: center;
+      padding: 4rem 2rem;
+      border-radius: var(--radius);
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 1000px;
+      animation: fadeIn 1s ease-out;
+      box-shadow: 0 10px 40px rgba(42, 157, 143, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem auto;
+      width: 90%;
+      max-width: 1200px;
+      padding: 0 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--primary);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(42, 157, 143, 0.03) 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(42, 157, 143, 0.2);
+      border-top-color: var(--accent);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      color: var(--accent);
+    }
+
+    .card h2 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(38, 70, 83, 0.4);
+    }
+
+    .btn i {
+      margin-left: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn:hover i {
+      transform: translateX(4px);
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+      color: white;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    footer .social-links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    footer .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    footer .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .stats-section {
+      background: white;
+      padding: 3rem 2rem;
+      margin: 3rem auto;
+      width: 90%;
+      max-width: 1200px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 1.5rem;
+    }
+
+    .stat-item .number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item .label {
+      font-size: 1rem;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    /* 📱 Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      header p {
+        font-size: 0.85rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--secondary);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .menu-toggle {
+        display: block;
+        align-self: flex-end;
+        margin: 0.5rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🎓 Career Guidance & Counseling Platform</h1>
+    <p>Helping Students Make Informed Career Decisions</p>
+  </header>
+
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="nav-links">
+      <a href="#home"><i class="fas fa-home"></i> Home</a>
+      <a href="#careers"><i class="fas fa-briefcase"></i> Career Paths</a>
+      <a href="#mentors"><i class="fas fa-user-tie"></i> Counselors</a>
+      <a href="#admin"><i class="fas fa-user-shield"></i> Admin Panel</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <h1>🎯 Discover Your Ideal Career Path</h1>
+    <p>Explore personalized guidance, expert mentorship, and tailored advice based on your unique interests, skills, and aspirations.</p>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="number">500+</div>
+        <div class="label">Career Paths</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">50+</div>
+        <div class="label">Expert Counselors</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">10k+</div>
+        <div class="label">Students Guided</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">95%</div>
+        <div class="label">Success Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="careers">
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-route"></i>
+      </div>
+      <h2>Explore Career Paths</h2>
+      <p>Browse comprehensive resources for various career options in technology, business, design, healthcare, and many more exciting fields.</p>
+      <a href="career.html" class="btn">View Careers <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+      <h2>Schedule Counseling</h2>
+      <p>Book personalized one-on-one sessions with expert counselors to discuss your career goals, opportunities, and create your success roadmap.</p>
+      <a href="counseling.html" class="btn">Book a Session <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-tasks"></i>
+      </div>
+      <h2>Skill Assessment</h2>
+      <p>Take comprehensive assessments to understand your strengths, passions, and discover the most suitable career paths tailored for you.</p>
+      <a href="assessment.html" class="btn">Take Test <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <section class="container" id="admin">
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-tachometer-alt"></i>
+      </div>
+      <h2>Admin Dashboard</h2>
+      <p>Manage resources, monitor counselor activity, track student engagement, and ensure platform excellence efficiently.</p>
+      <a href="admin.html" class="btn">Go to Admin <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-users-cog"></i>
+      </div>
+      <h2>Manage Counselors</h2>
+      <p>Connect students with professional counselors, manage their availability, sessions, and ensure quality mentorship for all.</p>
+      <a href="counseling.html" class="btn">Manage <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 Career Guidance & Counseling Platform | Designed with ❤️ for Students</p>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+          // Close mobile menu if open
+          document.querySelector('.nav-links').classList.remove('active');
+        }
+      });
+    });
+
+    // Add scroll animation to cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.opacity = '0';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

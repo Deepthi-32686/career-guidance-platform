@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counseling Sessions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2a9d8f;
+      --secondary: #264653;
+      --accent: #e9c46a;
+      --light: #f4f4f4;
+      --dark: #1d3557;
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--light) 0%, #e8f5f3 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 { 
+      color: var(--secondary);
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--secondary);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .box { 
+      background: white;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 700px;
+      margin: 20px auto;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      border-top: 4px solid var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label { 
+      font-weight: 600;
+      color: var(--secondary);
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    label i {
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+
+    input, select, textarea { 
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 0.3rem;
+      border-radius: var(--radius);
+      border: 2px solid #ddd;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232a9d8f' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button { 
+      background: linear-gradient(135deg, var(--primary) 0%, #1d7a6e 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+    }
+
+    button:hover { 
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(38, 70, 83, 0.4);
+    }
+
+    button i {
+      margin-right: 0.5rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--secondary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      margin: 2rem auto;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(38, 70, 83, 0.3);
+    }
+
+    .back-link:hover {
+      background: var(--dark);
+      transform: translateX(-5px);
+    }
+
+    .back-container {
+      text-align: center;
+    }
+
+    .success-message {
+      display: none;
+      background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-message i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .counselors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 1200px;
+    }
+
+    .counselor-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .counselor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(42, 157, 143, 0.2);
+      border-color: var(--primary);
+    }
+
+    .counselor-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .counselor-name {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.3rem;
+    }
+
+    .counselor-specialty {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .box {
+        padding: 1.5rem;
+      }
+      .counselors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1><i class="fas fa-calendar-check"></i> Book a Counseling Session</h1>
+  <p class="subtitle">Connect with our expert counselors for personalized guidance</p>
+
+  <div class="success-message" id="successMessage">
+    <i class="fas fa-check-circle"></i>
+    <p>Your session has been booked successfully! We'll contact you soon.</p>
+  </div>
+
+  <h2 style="text-align: center; color: var(--secondary); margin: 2rem 0 1rem; font-size: 1.5rem;">Our Expert Counselors</h2>
+  
+  <div class="counselors-grid">
+    <div class="counselor-card">
+      <div class="counselor-avatar">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <div class="counselor-name">Dr. Sarah Johnson</div>
+      <div class="counselor-specialty">Software Engineering</div>
+    </div>
+    <div class="counselor-card">
+      <div class="counselor-avatar">
+        <i class="fas fa-user-graduate"></i>
+      </div>
+      <div class="counselor-name">Prof. Michael Chen</div>
+      <div class="counselor-specialty">Data Science</div>
+    </div>
+    <div class="counselor-card">
+      <div class="counselor-avatar">
+        <i class="fas fa-user-md"></i>
+      </div>
+      <div class="counselor-name">Emma Williams</div>
+      <div class="counselor-specialty">UI/UX Design</div>
+    </div>
+    <div class="counselor-card">
+      <div class="counselor-avatar">
+        <i class="fas fa-user-check"></i>
+      </div>
+      <div class="counselor-name">James Rodriguez</div>
+      <div class="counselor-specialty">Digital Marketing</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <form id="counselingForm">
+      <div class="form-group">
+        <label for="name">
+          <i class="fas fa-user"></i> Full Name:
+        </label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">
+          <i class="fas fa-envelope"></i> Email:
+        </label>
+        <input type="email" id="email" placeholder="your.email@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">
+          <i class="fas fa-phone"></i> Phone Number:
+        </label>
+        <input type="tel" id="phone" placeholder="+1 (555) 000-0000" required>
+      </div>
+
+      <div class="form-group">
+        <label for="topic">
+          <i class="fas fa-briefcase"></i> Preferred Career Field:
+        </label>
+        <select id="topic" required>
+          <option value="">Select a field...</option>
+          <option>Software Development</option>
+          <option>Data Science</option>
+          <option>UI/UX Design</option>
+          <option>Digital Marketing</option>
+          <option>Product Management</option>
+          <option>Cybersecurity</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">
+          <i class="fas fa-calendar"></i> Preferred Date:
+        </label>
+        <input type="date" id="date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">
+          <i class="fas fa-comment"></i> Questions or Goals:
+        </label>
+        <textarea id="message" rows="4" placeholder="Tell us about your career goals, questions, or what you'd like to discuss during the session..." required></textarea>
+      </div>
+
+      <button type="submit">
+        <i class="fas fa-paper-plane"></i> Book Your Session
+      </button>
+    </form>
+  </div>
+
+  <div class="back-container">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+  </div>
+
+  <script>
+    // Set minimum date to today
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    document.getElementById('counselingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show success message
+      document.getElementById('successMessage').classList.add('show');
+      
+      // Reset form
+      this.reset();
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('successMessage').classList.remove('show');
+      }, 5000);
+    });
+
+    // Counselor card click effect
+    document.querySelectorAll('.counselor-card').forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove previous selections
+        document.querySelectorAll('.counselor-card').forEach(c => {
+          c.style.borderColor = 'transparent';
+        });
+        // Highlight selected
+        this.style.borderColor = 'var(--primary)';
+      });
+    });
+  </script>
+</body>
+</html>
